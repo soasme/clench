@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'henghah.album',
     'henghah.dictation',
     'henghah.api',
+    'henghah.powerpack',
 ]
 
 MIDDLEWARE = [

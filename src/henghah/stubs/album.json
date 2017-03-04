@@ -1,0 +1,70 @@
+{
+    "app_label": "album",
+    "instances": [
+        {
+            "model_name": "Series",
+            "data": {
+                "slug": "ap-news-minute",
+                "title": "AP News Minute",
+                "description": "The Associated Press News Minute",
+                "cover": "/images/2000/01/01/ap-news-minute-cover.jpg"
+            }
+        },
+        {
+            "model_name": "Series",
+            "data": {
+                "slug": "bbc-one-minute-world-news",
+                "title": "BBC One-minute World News",
+                "description": "World news in one minute.",
+                "cover": "/images/2000/01/01/bbc-cover.jpg"
+            }
+        },
+        {
+            "model_name": "Audio",
+            "data": {
+                "title": "AP News Dictation Mar 2 a.m. 2017",
+                "audio": "/audios/2000/01/01/0001.mp3"
+            },
+            "refs": {
+                "series": {
+                    "model_name": "Series",
+                    "data": {
+                        "slug": "ap-news-minute"
+                    }
+                }
+            }
+        },
+        {
+            "model_name": "Transcript",
+            "data": {
+                "start": 0,
+                "end": 500,
+                "content": "5 Seconds Text"
+            },
+            "refs": {
+                "audio": {
+                    "model_name": "Audio",
+                    "data": {
+                        "title": "AP News Dictation Mar 2 a.m. 2017"
+                    }
+                }
+            }
+        },
+        {
+            "model_name": "Transcript",
+            "data": {
+                "start": 500,
+                "end": 1500,
+                "content": "10 Seconds Text"
+            },
+            "refs": {
+                "audio": {
+                    "model_name": "Audio",
+                    "data": {
+                        "title": "AP News Dictation Mar 2 a.m. 2017"
+                    }
+                }
+            }
+        }
+    ]
+}

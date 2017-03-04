@@ -1,0 +1,19 @@
+{
+    "app_label": "language",
+    "instances": [
+        {
+            "model_name": "Language",
+            "data": {
+                "slug": "english",
+                "title": "English"
+            }
+        },
+        {
+            "model_name": "Language",
+            "data": {
+                "slug": "simplified-chinese",
+                "title": "简体汉语"
+            }
+        }
+    ]
+}

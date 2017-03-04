@@ -2,10 +2,18 @@ from __future__ import unicode_literals
 
 from django.db import models
 
+from henghah.album.utils import upload_to
+
+def upload_to_images(instance, filename):
+    return upload_to('images', filename)
+
+def upload_to_audios(instance, filename):
+    return upload_to('audios', filename)
+
 class Series(models.Model):
     slug = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
-    cover_cdn_key = models.CharField(max_length=255)
+    cover = models.FileField(upload_to=upload_to_images, default='')
     description = models.CharField(max_length=1024)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -15,7 +23,7 @@ class Series(models.Model):
 
 class Audio(models.Model):
     title = models.CharField(max_length=255)
-    audio_cdn_key = models.CharField(max_length=255)
+    audio = models.FileField(upload_to=upload_to_audios, default='')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

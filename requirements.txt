@@ -1,3 +1,5 @@
+werkzeug
 django
+django_extensions
 djangorestframework
 django-filter

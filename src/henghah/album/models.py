@@ -22,6 +22,7 @@ class Series(models.Model):
         return u'%s' % self.title
 
 class Audio(models.Model):
+    series = models.ForeignKey('Series', on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     audio = models.FileField(upload_to=upload_to_audios, default='')
     created_at = models.DateTimeField(auto_now_add=True)

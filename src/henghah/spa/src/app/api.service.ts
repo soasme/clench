@@ -3,7 +3,7 @@ import { Headers, Http  } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
-import { Audio } from './data';
+import { Audio, Series } from './data';
 
 
 @Injectable()
@@ -39,6 +39,13 @@ export class APIService {
       }
       return url;
     })
+  }
+
+  getResource(url: string): Promise<any> {
+    return this.http.get(url)
+    .toPromise()
+    .then(response => response.json())
+    .catch(this.handleError);
   }
 
   getAudio(url: string): Promise<Audio> {

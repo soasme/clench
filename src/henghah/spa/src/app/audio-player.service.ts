@@ -30,7 +30,7 @@ export class AudioPlayerService {
     return this.TranformTranscriptToFrame(transcript);
   }
 
-  getNextFrame(audio, Audio): AudioFrame {
+  getNextFrame(audio: Audio): AudioFrame {
     if (this.current < audio.transcripts.length) {
       this.current = this.current + 1;
       var transcript = audio.transcripts[this.current];

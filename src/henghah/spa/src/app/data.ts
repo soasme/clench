@@ -1,3 +1,10 @@
+export class Series {
+  title: string;
+  cover: string;
+  description: string;
+  audios: string;
+}
+
 export class Transcript {
     start: number;
     end: number;

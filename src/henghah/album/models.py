@@ -32,12 +32,15 @@ class Audio(models.Model):
         return u'%s' % self.title
 
 class Transcript(models.Model):
-    audio = models.ForeignKey('Audio', on_delete=models.CASCADE)
+    audio = models.ForeignKey('Audio', on_delete=models.CASCADE, related_name="transcripts")
     start = models.IntegerField()
     end = models.IntegerField()
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['start', ]
 
     def __unicode__(self):
         return u'%s (%s - %s)' % (self.audio.title, self.start, self.end)

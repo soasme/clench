@@ -3,3 +3,4 @@ django
 django_extensions
 djangorestframework
 django-filter
+django-cors-headers

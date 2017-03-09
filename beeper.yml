@@ -1,0 +1,8 @@
+application: clench
+manifest:
+    - src
+    - requirements.txt
+postbuild:
+    - cd src/henghah/spa && npm install && npm build
+postinstall:
+    - echo "Done."

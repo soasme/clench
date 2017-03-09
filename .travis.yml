@@ -5,7 +5,7 @@ script: "beeper build --version $TRAVIS_BUILD_NUMBER"
 deploy:
   provider: releases
   api_key: "$GITHUB_TOKEN"
-  file: "dist/$TRAVIS_BUILD_NUMBER.tgz"
+  file: "dist/clench-$TRAVIS_BUILD_NUMBER.tgz"
   skip_cleanup: true
   on:
     tags: true

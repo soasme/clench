@@ -8,7 +8,9 @@ export class AudioPlayerService {
 
   current: number;
 
-  constructor(private api: APIService) {}
+  constructor(private api: APIService) {
+    this.current = 0;
+  }
 
   getAudio(): Promise<Audio> {
     return this.api.getApi('audios', 6).then(

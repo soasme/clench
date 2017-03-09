@@ -1,12 +1,13 @@
 import { Component, Input, ViewChild, Renderer } from '@angular/core';
 import { AudioPlayerService } from './audio-player.service';
+import { APIService } from './api.service';
 import { Audio, AudioFrame } from './data';
 
 @Component({
   selector: 'audio-player',
   providers: [AudioPlayerService],
-  template: `<div class="progress">{{ formatProgress()}}</div>
-  <div class="controllers">
+  template: `
+  <div class="controllers" *ngIf="audio">
     <div class="play current"
       (click)="playCurrent()">Play</div>
     <div class="play next"
@@ -21,34 +22,21 @@ import { Audio, AudioFrame } from './data';
   `
 })
 export class AudioPlayerComponent {
-  @Input() audio: Audio;
+  audio: Audio;
   @ViewChild('player') player;
 
   progress: number;
 
   constructor(
+    private api: APIService,
     private audioPlayerService: AudioPlayerService,
     public renderer: Renderer
   ) { }
 
-  getAudio(): void {
-    this.audioPlayerService.getAudio().then(
-      audio => {
-        this.audio = audio;
-        console.log(audio.audio);
-        this.renderer.setElementAttribute(this.player, 'src', audio.audio);
-      }
-    );
-  }
-
-
-  ngOnInit(): void {
-    this.getAudio();
-    this.progress = 0;
-  }
-
-  formatProgress(): string {
-    return '00:00:00';
+  setAudio(audio: Audio): void {
+    this.api.getResource(audio.audio_api).then(audio => {
+      this.audio = audio;
+    });
   }
 
   playFrame(frame: AudioFrame): void {

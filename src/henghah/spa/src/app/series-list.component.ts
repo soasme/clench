@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { APIService } from './api.service';
 import { Series } from './data';
 
+
 @Component({
   selector: 'series-list',
-  providers: [APIService],
+  providers: [APIService ],
   template: `
   <ul>
     <li *ngFor="let series of seriesList; let i = index; ">
@@ -15,11 +16,13 @@ import { Series } from './data';
         <div>
           <h2>{{ series.title }}</h2>
           <p>{{ series.description }}</p>
-          <a routerLink="/audios" routerLinkActive="active">Audios</a>
+          <a routerLink="/series/{{ series.slug }}" audios_api="series.audio_api" routerLinkActive="active">Audios</a>
         </div>
       </div>
     </li>
   </ul>
+  <div>
+  </div>
   `
 })
 export class SeriesListComponent {
@@ -33,10 +36,12 @@ export class SeriesListComponent {
   ngOnInit(): void {
     this.api.getApi('series', null).then(url=>
       this.api.getResource(url).then(list => {
-        this.seriesList = list;
+        this.seriesList = list.results;
       })
     )
   }
+
+
 
 }
 

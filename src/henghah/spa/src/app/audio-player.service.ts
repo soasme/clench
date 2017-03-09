@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { APIService } from './api.service';
 import { Transcript, Audio, AudioFrame } from './data';
-import { AUDIO } from './api-mock';
 
 @Injectable()
 export class AudioPlayerService {
@@ -18,12 +17,26 @@ export class AudioPlayerService {
     )
   }
 
+  reset(): void {
+    this.current = 0;
+  }
+
   TranformTranscriptToFrame(transcript: Transcript): AudioFrame {
     return {
       currentTime: transcript.start / 100.0,
       segmentLength: (transcript.end - transcript.start) / 100.0,
       content: transcript.content
     };
+  }
+
+  getOriginText(audio: Audio): string {
+    var str = "";
+    var i: number;
+    for (i = 0; i < audio.transcripts.length; i++) {
+      str += audio.transcripts[i].content;
+      str += '\n';
+    }
+    return str;
   }
 
   getCurrentFrame(audio: Audio): AudioFrame {

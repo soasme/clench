@@ -25,10 +25,17 @@ export class Audio {
     transcripts: Transcript[];
     created_at: string;
     updated_at: string;
+    audio_api: string;
+    dictate_api: string;
 }
 
 export class AudioFrame {
   currentTime: number;
   segmentLength: number;
   content: string;
+}
+
+export class Diff {
+  origin: string;
+  text: string;
 }

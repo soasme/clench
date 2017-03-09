@@ -7,22 +7,25 @@ import { Series } from './data';
   selector: 'series-list',
   providers: [APIService ],
   template: `
-  <ul>
-    <li *ngFor="let series of seriesList; let i = index; ">
-      <div>
-        <div>
-          <img src="{{ series.cover }}">
-        </div>
-        <div>
-          <h2>{{ series.title }}</h2>
-          <p>{{ series.description }}</p>
-          <a routerLink="/series/{{ series.slug }}" audios_api="series.audio_api" routerLinkActive="active">Audios</a>
+
+  <section class="page-content container">
+    <div class="row space-top">
+      <div class="col-md-9 col-sm-7">
+        <div class="col-md-6" *ngFor="let series of seriesList; let i = index; ">
+          <div class="thumbnail with-caption">
+            <img src="{{ series.cover }}" alt="{{ series.title }}">
+            <div class="caption">
+              <h4>{{ series.title }}</h4>
+              <span class="text-muted">{{ series.updated_at }}</span>
+              <p>{{ series.description }}</p>
+              <a class="btn btn-primary" role="button" routerLink="/series/{{ series.slug }}" audios_api="series.audio_api" routerLinkActive="active">Audios</a>
+            </div>
+          </div>
         </div>
       </div>
-    </li>
-  </ul>
-  <div>
-  </div>
+    </div>
+  </section>
+
   `
 })
 export class SeriesListComponent {

@@ -48,6 +48,13 @@ export class APIService {
     .catch(this.handleError);
   }
 
+  getDictationDiff(audio: Audio, text: string): Promise<any> {
+    return this.http.post(audio.dictate_api, { text })
+    .toPromise()
+    .then(response => response.json())
+    .catch(this.handleError);
+  }
+
   getAudio(url: string): Promise<Audio> {
     return this.http.get(url)
     .toPromise()

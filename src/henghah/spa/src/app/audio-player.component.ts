@@ -1,19 +1,22 @@
 import { Component, Input, ViewChild, Renderer } from '@angular/core';
 import { AudioPlayerService } from './audio-player.service';
 import { APIService } from './api.service';
-import { Audio, AudioFrame } from './data';
+import { Diff, Audio, AudioFrame } from './data';
 
 @Component({
   selector: 'audio-player',
-  providers: [AudioPlayerService],
+  providers: [AudioPlayerService ],
   template: `
   <div class="controllers" *ngIf="audio">
-    <div class="play current"
-      (click)="playCurrent()">Play</div>
-    <div class="play next"
-      (click)="playNext()">Next</div>
-    <div class="pause"
-      (click)="pause()">Pause</div>
+    <a class="btn btn-xs btn-primary" role="button"
+      (click)="playCurrent()">Play(ctrl-p)</a>
+    <a class="btn btn-xs btn-primary"  role="button"
+      (click)="playNext()">Next(ctrl-n)</a>
+    <br>
+    <a class="btn btn-xs btn-primary" role="button"
+      (click)="pause()">Pause(ctrl-c)</a>
+    <a class="btn btn-xs btn-primary"  role="button"
+      (click)="reset()">Reset(ctrl-r)</a>
   </div>
   <audio controls #player [attr.src]="audio.audio" *ngIf="audio">
     <source [src]="audio.audio" type="audio/mpeg">
@@ -31,7 +34,12 @@ export class AudioPlayerComponent {
     private api: APIService,
     private audioPlayerService: AudioPlayerService,
     public renderer: Renderer
-  ) { }
+  ) {
+    this.setHotKeys();
+  }
+
+  setHotKeys(): void {
+  }
 
   setAudio(audio: Audio): void {
     this.api.getResource(audio.audio_api).then(audio => {
@@ -46,7 +54,17 @@ export class AudioPlayerComponent {
     setTimeout(() => {
       el.pause();
     }, frame.segmentLength * 1000.0);
+  }
 
+  diff(text: string): Diff {
+    var origin = this.audioPlayerService.getOriginText(this.audio);
+    return { origin, text };
+  }
+
+  reset(): void {
+    this.pause();
+    this.audioPlayerService.reset();
+    this.playCurrent();
   }
 
   playCurrent(): void {
@@ -62,4 +80,5 @@ export class AudioPlayerComponent {
   pause(): void {
     this.player.nativeElement.pause();
   }
+
 }
